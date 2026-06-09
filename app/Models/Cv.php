@@ -4,11 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-use Illuminate\Database\Eloquent\Attributes\Fillable;
-
-#[Fillable(['user_id', 'file_path', 'hasil_ai'])]
 class Cv extends Model
 {
+    protected $fillable = ['user_id', 'file_path', 'hasil_ai'];
     protected $casts = [
         'hasil_ai' => 'array',
     ];

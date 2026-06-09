@@ -4,11 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-use Illuminate\Database\Eloquent\Attributes\Fillable;
-
-#[Fillable(['user_id', 'nama_perusahaan', 'alamat', 'kontak'])]
 class Company extends Model
 {
+    protected $fillable = ['user_id', 'nama_perusahaan', 'alamat', 'kontak'];
     public function jobVacancies()
     {
         return $this->hasMany(JobVacancy::class);

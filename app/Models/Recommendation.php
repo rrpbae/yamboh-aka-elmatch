@@ -4,11 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-use Illuminate\Database\Eloquent\Attributes\Fillable;
-
-#[Fillable(['cv_id', 'job_vacancy_id', 'score'])]
 class Recommendation extends Model
 {
+    protected $fillable = ['cv_id', 'job_vacancy_id', 'score'];
     public function cv()
     {
         return $this->belongsTo(Cv::class);

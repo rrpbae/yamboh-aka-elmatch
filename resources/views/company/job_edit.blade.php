@@ -1,52 +1,62 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="max-w-3xl mx-auto">
-    <div class="mb-6 flex items-center">
-        <a href="{{ route('company.dashboard') }}" class="text-gray-500 hover:text-blue-600 mr-3 transition"><i class="fas fa-arrow-left"></i></a>
-        <h1 class="text-2xl font-bold text-gray-900">Edit Lowongan Kerja</h1>
-    </div>
-
-    <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-        <div class="p-6 sm:p-8">
-            <form action="{{ route('company.jobs.update', $job->id) }}" method="POST">
-                @csrf
-                @method('PUT')
-                
-                <div class="mb-5">
-                    <label for="posisi" class="block text-sm font-medium text-gray-700 mb-1">Posisi / Jabatan <span class="text-red-500">*</span></label>
-                    <input type="text" id="posisi" name="posisi" value="{{ old('posisi', $job->posisi) }}" class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 border p-2.5" required>
-                    @error('posisi') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="premium-card">
+                <div class="d-flex align-items-center mb-4">
+                    <a href="{{ route('company.dashboard') }}" class="btn btn-light rounded-circle me-3" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                          <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+                        </svg>
+                    </a>
+                    <h3 style="font-weight: 700; color: var(--text-main); margin:0;">Edit Lowongan: {{ $job->posisi }}</h3>
                 </div>
 
-                <div class="mb-5">
-                    <label for="deskripsi" class="block text-sm font-medium text-gray-700 mb-1">Deskripsi Pekerjaan <span class="text-red-500">*</span></label>
-                    <textarea id="deskripsi" name="deskripsi" rows="4" class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 border p-2.5" required>{{ old('deskripsi', $job->deskripsi) }}</textarea>
-                    @error('deskripsi') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
-                </div>
+                <hr style="border-color: rgba(163, 174, 209, 0.3); margin-bottom: 30px;">
 
-                <div class="mb-5">
-                    <label for="kualifikasi" class="block text-sm font-medium text-gray-700 mb-1">Kualifikasi / Persyaratan <span class="text-red-500">*</span></label>
-                    <textarea id="kualifikasi" name="kualifikasi" rows="5" class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 border p-2.5" required>{{ old('kualifikasi', $job->kualifikasi) }}</textarea>
-                    @error('kualifikasi') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
-                </div>
-
-                <div class="mb-8">
-                    <div class="flex items-center">
-                        <input id="status_open" name="status_open" type="checkbox" value="1" {{ old('status_open', $job->status_open) ? 'checked' : '' }} class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
-                        <label for="status_open" class="ml-2 block text-sm text-gray-900 font-medium">
-                            Lowongan Masih Dibuka (Aktif)
-                        </label>
+                <form method="POST" action="{{ route('company.jobs.update', $job->id) }}">
+                    @csrf
+                    @method('PUT')
+                    
+                    <div class="mb-4">
+                        <label for="posisi" style="font-weight: 600; color: var(--text-main); margin-bottom: 8px;">Posisi / Jabatan Pekerjaan</label>
+                        <input type="text" class="form-control form-control-premium @error('posisi') is-invalid @enderror" id="posisi" name="posisi" value="{{ old('posisi', $job->posisi) }}" required>
+                        @error('posisi')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
-                </div>
 
-                <div class="flex items-center justify-end border-t border-gray-100 pt-5 mt-5">
-                    <a href="{{ route('company.dashboard') }}" class="text-gray-600 hover:text-gray-900 font-medium px-4 py-2 mr-2">Batal</a>
-                    <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 px-6 rounded-lg transition duration-150">
-                        Simpan Perubahan
-                    </button>
-                </div>
-            </form>
+                    <div class="mb-4">
+                        <label for="deskripsi" style="font-weight: 600; color: var(--text-main); margin-bottom: 8px;">Deskripsi Singkat Pekerjaan</label>
+                        <textarea class="form-control form-control-premium @error('deskripsi') is-invalid @enderror" id="deskripsi" name="deskripsi" rows="3" required>{{ old('deskripsi', $job->deskripsi) }}</textarea>
+                        @error('deskripsi')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="kualifikasi" style="font-weight: 600; color: var(--text-main); margin-bottom: 8px;">Kualifikasi & Persyaratan (Skill)</label>
+                        <textarea class="form-control form-control-premium @error('kualifikasi') is-invalid @enderror" id="kualifikasi" name="kualifikasi" rows="5" required>{{ old('kualifikasi', $job->kualifikasi) }}</textarea>
+                        @error('kualifikasi')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="mb-4 premium-card p-3" style="background: rgba(163, 174, 209, 0.1); border-color: transparent;">
+                        <div class="form-check form-switch" style="font-size: 1.1rem;">
+                            <input class="form-check-input" type="checkbox" role="switch" id="status_open" name="status_open" value="1" {{ old('status_open', $job->status_open) ? 'checked' : '' }} style="cursor:pointer;">
+                            <label class="form-check-label ms-2" for="status_open" style="font-weight: 600; color: var(--text-main); cursor:pointer;">Status Lowongan Terbuka</label>
+                        </div>
+                        <small style="color: var(--text-muted); display: block; margin-top: 5px;">Jika dinonaktifkan (di-off-kan), lowongan ini tidak akan muncul lagi di sistem rekomendasi pelamar.</small>
+                    </div>
+
+                    <div class="d-flex justify-content-end mt-4">
+                        <button type="submit" class="premium-btn px-5">Simpan Perubahan</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>

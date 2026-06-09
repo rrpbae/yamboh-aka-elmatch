@@ -1,43 +1,54 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="max-w-3xl mx-auto">
-    <div class="mb-6 flex items-center">
-        <a href="{{ route('company.dashboard') }}" class="text-gray-500 hover:text-blue-600 mr-3 transition"><i class="fas fa-arrow-left"></i></a>
-        <h1 class="text-2xl font-bold text-gray-900">Tambah Lowongan Kerja</h1>
-    </div>
-
-    <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-        <div class="p-6 sm:p-8">
-            <form action="{{ route('company.jobs.store') }}" method="POST">
-                @csrf
-                
-                <div class="mb-5">
-                    <label for="posisi" class="block text-sm font-medium text-gray-700 mb-1">Posisi / Jabatan <span class="text-red-500">*</span></label>
-                    <input type="text" id="posisi" name="posisi" value="{{ old('posisi') }}" class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 border p-2.5" required placeholder="Contoh: Senior Laravel Developer">
-                    @error('posisi') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="premium-card">
+                <div class="d-flex align-items-center mb-4">
+                    <a href="{{ route('company.dashboard') }}" class="btn btn-light rounded-circle me-3" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                          <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+                        </svg>
+                    </a>
+                    <h3 style="font-weight: 700; color: var(--text-main); margin:0;">Publikasikan Lowongan Baru</h3>
                 </div>
 
-                <div class="mb-5">
-                    <label for="deskripsi" class="block text-sm font-medium text-gray-700 mb-1">Deskripsi Pekerjaan <span class="text-red-500">*</span></label>
-                    <textarea id="deskripsi" name="deskripsi" rows="4" class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 border p-2.5" required placeholder="Jelaskan tanggung jawab dan jobdesc dari posisi ini.">{{ old('deskripsi') }}</textarea>
-                    @error('deskripsi') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
-                </div>
+                <hr style="border-color: rgba(163, 174, 209, 0.3); margin-bottom: 30px;">
 
-                <div class="mb-8">
-                    <label for="kualifikasi" class="block text-sm font-medium text-gray-700 mb-1">Kualifikasi / Persyaratan <span class="text-red-500">*</span></label>
-                    <p class="text-xs text-gray-500 mb-2">Tuliskan *skill* utama yang dibutuhkan (misal: PHP, Laravel, API). Sistem AI kami akan mencocokkan kata kunci ini dengan CV pelamar.</p>
-                    <textarea id="kualifikasi" name="kualifikasi" rows="5" class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 border p-2.5" required placeholder="1. Menguasai PHP 8&#10;2. Berpengalaman dengan Laravel 11&#10;3. Paham Git dan CI/CD">{{ old('kualifikasi') }}</textarea>
-                    @error('kualifikasi') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
-                </div>
+                <form method="POST" action="{{ route('company.jobs.store') }}">
+                    @csrf
+                    
+                    <div class="mb-4">
+                        <label for="posisi" style="font-weight: 600; color: var(--text-main); margin-bottom: 8px;">Posisi / Jabatan Pekerjaan</label>
+                        <input type="text" class="form-control form-control-premium @error('posisi') is-invalid @enderror" id="posisi" name="posisi" value="{{ old('posisi') }}" placeholder="Contoh: Backend Web Developer" required>
+                        @error('posisi')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
 
-                <div class="flex items-center justify-end border-t border-gray-100 pt-5 mt-5">
-                    <a href="{{ route('company.dashboard') }}" class="text-gray-600 hover:text-gray-900 font-medium px-4 py-2 mr-2">Batal</a>
-                    <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 px-6 rounded-lg transition duration-150">
-                        Posting Lowongan
-                    </button>
-                </div>
-            </form>
+                    <div class="mb-4">
+                        <label for="deskripsi" style="font-weight: 600; color: var(--text-main); margin-bottom: 8px;">Deskripsi Singkat Pekerjaan</label>
+                        <textarea class="form-control form-control-premium @error('deskripsi') is-invalid @enderror" id="deskripsi" name="deskripsi" rows="3" placeholder="Ceritakan secara singkat apa yang akan dikerjakan pada posisi ini..." required>{{ old('deskripsi') }}</textarea>
+                        @error('deskripsi')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="kualifikasi" style="font-weight: 600; color: var(--text-main); margin-bottom: 8px;">Kualifikasi & Persyaratan (Skill)</label>
+                        <textarea class="form-control form-control-premium @error('kualifikasi') is-invalid @enderror" id="kualifikasi" name="kualifikasi" rows="5" placeholder="Sebutkan skill spesifik agar sistem AI kami mudah memprosesnya. Contoh: Menguasai PHP, Laravel, MySQL. Berpengalaman 2 tahun..." required>{{ old('kualifikasi') }}</textarea>
+                        <small style="color: var(--text-muted); margin-top: 5px; display: block;">* Pastikan menuliskan kata kunci (keyword) skill teknis yang dibutuhkan agar sistem rekomendasi AI ElMatch berjalan optimal.</small>
+                        @error('kualifikasi')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="d-flex justify-content-end mt-5">
+                        <button type="submit" class="premium-btn px-5">Publikasikan Lowongan</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>

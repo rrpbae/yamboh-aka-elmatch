@@ -3,51 +3,49 @@
 @section('content')
 <div class="container mt-4">
     <div class="row justify-content-center">
-        <div class="col-md-10">
-            <!-- Glassmorphism Welcome Card -->
-            <div class="premium-card text-center mb-5">
-                <div class="mb-4">
-                    <span class="glass-badge">Halo, {{ Auth::user()->name }} 👋</span>
+        <div class="col-md-8">
+            <div class="premium-card">
+                <div class="text-center mb-5">
+                    <div style="background: var(--accent-light); width: 64px; height: 64px; border-radius: 16px; display:flex; align-items:center; justify-content:center; margin: 0 auto 20px;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="var(--accent-color)" class="bi bi-person-workspace" viewBox="0 0 16 16">
+                          <path d="M4 16s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H4Zm4-5.95a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"/>
+                          <path d="M2 1a2 2 0 0 0-2 2v9.5A1.5 1.5 0 0 0 1.5 14h.653a5.373 5.373 0 0 1 1.066-2H1V3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v9h-2.219c.554.654.89 1.373 1.066 2h.653a1.5 1.5 0 0 0 1.5-1.5V3a2 2 0 0 0-2-2H2Z"/>
+                        </svg>
+                    </div>
+                    <h3 style="font-weight: 700; color: var(--text-main); font-size: 1.5rem;">Selamat Datang, {{ Auth::user()->name }}</h3>
+                    <p style="color: var(--text-muted); font-size: 0.95rem; margin-top: 8px;">Mulai perjalanan karir profesional Anda dengan mengunggah Curriculum Vitae terbaru.</p>
                 </div>
-                <h2 class="font-weight-bold mb-3" style="font-size: 2.5rem; color: var(--text-main);">Selamat Datang di <span style="color: var(--accent-color);">ElMatch</span></h2>
-                <p style="color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto 30px;">
-                    Sistem kami menggunakan kecerdasan buatan untuk menganalisis CV Anda dan mencocokkannya dengan lowongan pekerjaan terbaik yang tersedia.
-                </p>
-                <a href="{{ route('user.cv.index') }}" class="premium-btn text-decoration-none d-inline-flex align-items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-cloud-arrow-up me-2" viewBox="0 0 16 16">
-                      <path fill-rule="evenodd" d="M7.646 5.146a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 6.707V10.5a.5.5 0 0 1-1 0V6.707L6.354 7.854a.5.5 0 1 1-.708-.708z"/>
-                      <path d="M4.406 3.342A5.53 5.53 0 0 1 8 2c2.69 0 4.923 2 5.166 4.579C14.758 6.804 16 8.137 16 9.773 16 11.569 14.502 13 12.687 13H3.781C1.708 13 0 11.366 0 9.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383m.653.757c-.757.653-1.153 1.44-1.153 2.056v.448l-.445.049C2.064 6.805 1 7.952 1 9.318 1 10.785 2.23 12 3.781 12h8.906C13.98 12 15 10.988 15 9.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 4.825 10.328 3 8 3a4.53 4.53 0 0 0-2.941 1.1z"/>
-                    </svg>
-                    Mulai Unggah CV
-                </a>
-            </div>
 
-            <div class="row">
-                <div class="col-md-6 mb-4">
-                    <div class="premium-card h-100 d-flex flex-column justify-content-center align-items-center text-center">
-                        <div style="background: rgba(5, 205, 153, 0.1); width: 70px; height: 70px; border-radius: 50%; display:flex; align-items:center; justify-content:center; margin-bottom: 20px;">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#05cd99" class="bi bi-file-earmark-check" viewBox="0 0 16 16">
-                              <path d="M10.854 7.854a.5.5 0 0 0-.708-.708L7.5 9.793 6.354 8.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0z"/>
-                              <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2M9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z"/>
-                            </svg>
+                <div class="row mt-4">
+                    <div class="col-md-6 mb-3">
+                        <div class="p-4 rounded-4" style="background-color: var(--primary-bg); border: 1px solid var(--card-border); height: 100%; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--accent-color)';" onmouseout="this.style.borderColor='var(--card-border)';">
+                            <div class="d-flex align-items-center mb-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="var(--accent-color)" class="bi bi-file-earmark-arrow-up me-2" viewBox="0 0 16 16">
+                                  <path d="M8.5 11.5a.5.5 0 0 1-1 0V7.707L6.354 8.854a.5.5 0 1 1-.708-.708l2-2a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 7.707V11.5z"/>
+                                  <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"/>
+                                </svg>
+                                <h5 style="margin: 0; font-weight: 700; color: var(--text-main); font-size: 1rem;">Analisis AI Instan</h5>
+                            </div>
+                            <p style="color: var(--text-muted); font-size: 0.875rem; margin-bottom: 0;">Sistem kami mengekstrak keahlian dan pengalamanmu secara otomatis dengan akurasi tinggi.</p>
                         </div>
-                        <h4 style="font-weight: 700;">Analisis Cerdas</h4>
-                        <p style="color: var(--text-muted); font-size: 0.95rem;">Xetel AI mengekstrak data dari CV Anda dalam hitungan detik.</p>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="p-4 rounded-4" style="background-color: var(--primary-bg); border: 1px solid var(--card-border); height: 100%; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--accent-color)';" onmouseout="this.style.borderColor='var(--card-border)';">
+                            <div class="d-flex align-items-center mb-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="var(--accent-color)" class="bi bi-briefcase me-2" viewBox="0 0 16 16">
+                                  <path d="M6.5 1A1.5 1.5 0 0 0 5 2.5V3H1.5A1.5 1.5 0 0 0 0 4.5v8A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-8A1.5 1.5 0 0 0 14.5 3H11v-.5A1.5 1.5 0 0 0 9.5 1h-3zm0 1h3a.5.5 0 0 1 .5.5V3H6v-.5a.5.5 0 0 1 .5-.5zm1.886 6.914L15 7.151V12.5a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5V7.15l6.614 1.764a1.5 1.5 0 0 0 .772 0zM1.5 4h13a.5.5 0 0 1 .5.5v1.616L8.129 7.948a.5.5 0 0 1-.258 0L1 6.116V4.5a.5.5 0 0 1 .5-.5z"/>
+                                </svg>
+                                <h5 style="margin: 0; font-weight: 700; color: var(--text-main); font-size: 1rem;">Matching Presisi</h5>
+                            </div>
+                            <p style="color: var(--text-muted); font-size: 0.875rem; margin-bottom: 0;">Dapatkan rekomendasi pekerjaan yang relevan dengan profilmu secara seketika.</p>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-6 mb-4">
-                    <div class="premium-card h-100 d-flex flex-column justify-content-center align-items-center text-center">
-                        <div style="background: rgba(255, 206, 32, 0.1); width: 70px; height: 70px; border-radius: 50%; display:flex; align-items:center; justify-content:center; margin-bottom: 20px;">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#ffce20" class="bi bi-bullseye" viewBox="0 0 16 16">
-                              <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
-                              <path d="M8 13A5 5 0 1 1 8 3a5 5 0 0 1 0 10m0 1A6 6 0 1 0 8 2a6 6 0 0 0 0 12"/>
-                              <path d="M8 11A3 3 0 1 1 8 5a3 3 0 0 1 0 6m0 1A4 4 0 1 0 8 4a4 4 0 0 0 0 8"/>
-                              <path d="M9.5 8a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0"/>
-                            </svg>
-                        </div>
-                        <h4 style="font-weight: 700;">Cocok & Akurat</h4>
-                        <p style="color: var(--text-muted); font-size: 0.95rem;">Algoritma kami mencarikan pekerjaan yang paling sesuai dengan profil Anda.</p>
-                    </div>
+
+                <div class="text-center mt-5">
+                    <a href="{{ route('user.cv.index') }}" class="premium-btn text-decoration-none" style="padding: 12px 32px; font-size: 1rem;">
+                        Mulai Upload CV <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right ms-2" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/></svg>
+                    </a>
                 </div>
             </div>
         </div>

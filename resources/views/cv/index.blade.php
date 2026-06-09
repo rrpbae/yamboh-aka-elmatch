@@ -1,89 +1,118 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container mt-4">
-    <div class="row justify-content-center">
-        <div class="col-md-10">
-            
-            @if(session('success'))
-                <div class="alert alert-success premium-card mb-4" style="border-left: 5px solid #05cd99; padding: 15px 20px; border-radius: 12px; background: rgba(5, 205, 153, 0.1);">
-                    {{ session('success') }}
-                </div>
-            @endif
-
-            <!-- Upload Area -->
-            <div class="premium-card mb-5">
-                <div class="d-flex justify-content-between align-items-center mb-4">
-                    <h3 style="font-weight: 700; color: var(--text-main); margin:0;">Unggah CV Anda</h3>
-                    <span class="glass-badge">Format PDF</span>
-                </div>
+<div class="container mt-4 mb-5">
+    <div class="row">
+        <!-- Form Upload Column -->
+        <div class="col-md-5 mb-4">
+            <div class="premium-card">
+                <h4 style="font-weight: 700; color: var(--text-main); margin-bottom: 24px; font-size: 1.25rem;">Unggah Dokumen CV</h4>
                 
+                @if(session('success'))
+                    <div class="alert alert-success mb-4 border-0" style="background-color: var(--success-light); color: var(--success-color); border-radius: 12px;">
+                        {{ session('success') }}
+                    </div>
+                @endif
+                
+                @if(session('error'))
+                    <div class="alert alert-danger mb-4 border-0" style="background-color: var(--danger-light); color: var(--danger-color); border-radius: 12px;">
+                        {{ session('error') }}
+                    </div>
+                @endif
+
                 <form action="{{ route('user.cv.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
-                    <div class="file-upload-wrapper position-relative" onclick="document.getElementById('cv_file').click()">
-                        <input type="file" name="cv_file" id="cv_file" class="d-none" accept=".pdf" onchange="document.getElementById('fileName').innerText = this.files[0].name">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="var(--accent-color)" class="bi bi-cloud-arrow-up mb-3 opacity-75" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd" d="M7.646 5.146a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 6.707V10.5a.5.5 0 0 1-1 0V6.707L6.354 7.854a.5.5 0 1 1-.708-.708z"/>
-                            <path d="M4.406 3.342A5.53 5.53 0 0 1 8 2c2.69 0 4.923 2 5.166 4.579C14.758 6.804 16 8.137 16 9.773 16 11.569 14.502 13 12.687 13H3.781C1.708 13 0 11.366 0 9.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383m.653.757c-.757.653-1.153 1.44-1.153 2.056v.448l-.445.049C2.064 6.805 1 7.952 1 9.318 1 10.785 2.23 12 3.781 12h8.906C13.98 12 15 10.988 15 9.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 4.825 10.328 3 8 3a4.53 4.53 0 0 0-2.941 1.1z"/>
-                        </svg>
-                        <h5 style="color: var(--text-main); font-weight: 600;">Klik atau Tarik File CV Anda ke Sini</h5>
-                        <p style="color: var(--text-muted); margin-bottom: 0;" id="fileName">Maksimal ukuran file: 2MB</p>
+                    
+                    <div class="mb-4">
+                        <label for="cv_file" class="file-upload-wrapper w-100 d-block">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="var(--accent-color)" class="bi bi-cloud-arrow-up mb-3" viewBox="0 0 16 16" style="margin: 0 auto;">
+                              <path fill-rule="evenodd" d="M7.646 5.146a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 6.707V10.5a.5.5 0 0 1-1 0V6.707L6.354 7.854a.5.5 0 1 1-.708-.708l2-2z"/>
+                              <path d="M4.406 3.342A5.53 5.53 0 0 1 8 2c2.69 0 4.923 2 5.166 4.579C14.758 6.804 16 8.137 16 9.773 16 11.569 14.502 13 12.687 13H3.781C1.708 13 0 11.366 0 9.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383zm.653.757c-.757.653-1.153 1.44-1.153 2.056v.448l-.445.049C2.064 6.805 1 7.952 1 9.318 1 10.785 2.23 12 3.781 12h8.906C13.98 12 15 10.988 15 9.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 4.825 10.328 3 8 3a4.53 4.53 0 0 0-2.941 1.1z"/>
+                            </svg>
+                            <span style="display: block; font-weight: 600; color: var(--text-main); margin-bottom: 8px;">Pilih File PDF</span>
+                            <span style="display: block; font-size: 0.85rem; color: var(--text-muted);">Maksimal ukuran file: 2MB</span>
+                        </label>
+                        <input type="file" class="form-control d-none @error('cv_file') is-invalid @enderror" id="cv_file" name="cv_file" accept=".pdf" required onchange="document.getElementById('file-name').innerText = this.files[0] ? this.files[0].name : ''">
+                        <div id="file-name" class="mt-3 text-center" style="font-size: 0.9rem; font-weight: 600; color: var(--text-main);"></div>
+                        @error('cv_file')
+                            <div class="invalid-feedback d-block mt-2">{{ $message }}</div>
+                        @enderror
                     </div>
 
-                    @error('cv_file')
-                        <div class="text-danger mt-2" style="font-size: 0.9rem;">{{ $message }}</div>
-                    @enderror
-
-                    <div class="text-end mt-4">
-                        <button type="submit" class="premium-btn">
-                            Mulai Analisis AI ✨
-                        </button>
-                    </div>
+                    <button type="submit" class="premium-btn w-100 py-3 text-uppercase" style="letter-spacing: 0.5px;">Unggah dan Analisis</button>
                 </form>
             </div>
+        </div>
 
-            <!-- CV History -->
-            <h4 class="mb-4" style="font-weight: 700; color: var(--text-main);">Riwayat Analisis CV</h4>
-            
-            @if($cvs->count() > 0)
-                <div class="row">
-                    @foreach($cvs as $cv)
-                        <div class="col-md-6 mb-4">
-                            <div class="premium-card">
-                                <div class="d-flex align-items-center mb-3">
-                                    <div style="background: rgba(67, 24, 255, 0.1); width: 50px; height: 50px; border-radius: 12px; display:flex; align-items:center; justify-content:center; margin-right: 15px;">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="var(--accent-color)" class="bi bi-file-pdf" viewBox="0 0 16 16">
-                                            <path d="M4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm0 1h8a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1"/>
-                                            <path d="M4.603 12.087a.8.8 0 0 1-.438-.42c-.195-.388-.13-.776.08-1.102.198-.307.526-.568.897-.787a7.7 7.7 0 0 1 1.482-.645 20 20 0 0 0 1.062-2.227 7.3 7.3 0 0 1-.43-1.295c-.086-.4-.119-.796-.046-1.136.075-.354.274-.672.65-.823.192-.077.4-.12.602-.077a.7.7 0 0 1 .471.242c.089.105.145.234.151.372a1.7 1.7 0 0 1-.01.597c-.033.228-.115.48-.21.758a17 17 0 0 1-.462 1.258c.376.541.815 1.05 1.3 1.5.498.468 1.06 1.028 1.625 1.46.335.257.653.47.92.61.27.142.5.25.688.33.19.083.35.195.45.348.102.158.15.35.12.56a.8.8 0 0 1-.166.425c-.14.168-.344.256-.563.266-.23.01-.52-.061-.856-.23A7.5 7.5 0 0 1 11.2 11.5c-.53-.418-1.15-1-1.74-1.63a18 18 0 0 1-2.27 1.15 14 14 0 0 1-2.02.664c-.45.097-.83.18-1.1.25-.26.07-.46.15-.56.24m.92-1.15c.34-.1.74-.2 1.18-.3.41-.09.83-.19 1.25-.3a16 16 0 0 0 1.7-1.07c-.47-.41-.95-.88-1.41-1.4-.41-.48-.8-1-1.15-1.54a17 17 0 0 0-1.05 2.1c-.2.43-.4.87-.55 1.32q-.1.3-.15.48c-.03.11-.05.19-.05.25-.01.07 0 .1.03.1.04 0 .1-.04.22-.1q.16-.07.38-.2M12.5 10c-.3-.08-.6-.2-1-.4a8 8 0 0 0-1.4-.6c.5-.4.9-.8 1.3-1.2.4-.4.8-.8 1-1.1.2-.2.3-.4.3-.6v-.1c0-.1 0-.1-.02-.1-.02 0-.05.02-.1.08-.06.07-.15.18-.28.34-.16.19-.36.44-.6.76-.23.3-.48.65-.77 1.03-.26.35-.55.72-.85 1.08.38.2.78.3 1.15.3.38 0 .68-.08.82-.2.1-.1.14-.2.13-.3m-3.9-6.4c-.1-.1-.3-.2-.5-.1-.2 0-.3.2-.4.4-.1.2-.1.5 0 .8.1.3.2.6.4.8.1-.1.2-.3.3-.6.1-.3.2-.6.2-.9z"/>
-                                        </svg>
-                                    </div>
-                                    <div>
-                                        <h6 style="font-weight: 700; margin: 0;">{{ Str::limit(str_replace('cv_uploads/', '', $cv->file_path), 20) }}</h6>
-                                        <small style="color: var(--text-muted);">Diunggah: {{ $cv->created_at->diffForHumans() }}</small>
-                                    </div>
-                                </div>
-                                
-                                <div class="d-flex flex-wrap gap-2 mb-3">
-                                    @if(isset($cv->hasil_ai['skills']) && is_array($cv->hasil_ai['skills']))
-                                        @foreach(array_slice($cv->hasil_ai['skills'], 0, 3) as $skill)
-                                            <span class="glass-badge" style="font-size: 0.75rem;">{{ $skill }}</span>
-                                        @endforeach
-                                        @if(count($cv->hasil_ai['skills']) > 3)
-                                            <span class="glass-badge" style="font-size: 0.75rem; background: rgba(163, 174, 209, 0.2); color: var(--text-muted);">+{{ count($cv->hasil_ai['skills']) - 3 }} lainnya</span>
-                                        @endif
-                                    @endif
-                                </div>
+        <!-- History Column -->
+        <div class="col-md-7">
+            <div class="premium-card h-100">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h4 style="font-weight: 700; color: var(--text-main); margin: 0; font-size: 1.25rem;">Riwayat Analisis CV</h4>
+                    <span class="glass-badge">{{ $cvs->count() }} Dokumen</span>
+                </div>
 
-                                <a href="{{ route('user.cv.show', $cv->id) }}" class="btn btn-outline-primary w-100" style="border-radius: 10px; font-weight: 600;">Lihat Rekomendasi Loker &rarr;</a>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-            @else
-                <div class="text-center p-5" style="border: 2px dashed rgba(163, 174, 209, 0.5); border-radius: 20px;">
-                    <p style="color: var(--text-muted); margin: 0;">Belum ada CV yang diunggah.</p>
-                </div>
-            @endif
+                @if($cvs->count() > 0)
+                    <div class="table-responsive">
+                        <table class="table table-borderless align-middle">
+                            <tbody>
+                                @foreach($cvs as $cv)
+                                    <tr>
+                                        <td class="py-4 px-0">
+                                            <div class="d-flex align-items-start">
+                                                <div style="background: var(--accent-light); padding: 14px; border-radius: 12px; margin-right: 16px;">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="var(--accent-color)" class="bi bi-file-earmark-text" viewBox="0 0 16 16">
+                                                      <path d="M5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zM5 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5z"/>
+                                                      <path d="M9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.5L9.5 0zm0 1m-4 11V2h3v2.5A1.5 1.5 0 0 0 10 6h2v7H4z"/>
+                                                    </svg>
+                                                </div>
+                                                <div class="w-100">
+                                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                                        <h6 style="font-weight: 700; color: var(--text-main); margin: 0; font-size: 1rem;">
+                                                            Dokumen Analisis #{{ $cv->id }}
+                                                        </h6>
+                                                        <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 500;">
+                                                            {{ $cv->created_at->format('d M Y, H:i') }}
+                                                        </span>
+                                                    </div>
+                                                    
+                                                    @php
+                                                        $hasilAi = is_string($cv->hasil_ai) ? json_decode($cv->hasil_ai, true) : $cv->hasil_ai;
+                                                    @endphp
+                                                    
+                                                    <div class="mb-3">
+                                                        @if(isset($hasilAi['skills']) && is_array($hasilAi['skills']))
+                                                            @foreach(array_slice($hasilAi['skills'], 0, 4) as $skill)
+                                                                <span class="glass-badge me-1 mb-1 d-inline-block" style="font-size: 0.75rem;">{{ $skill }}</span>
+                                                            @endforeach
+                                                            @if(count($hasilAi['skills']) > 4)
+                                                                <span class="text-muted" style="font-size: 0.8rem; font-weight: 500;">+{{ count($hasilAi['skills']) - 4 }} lainnya</span>
+                                                            @endif
+                                                        @else
+                                                            <span class="text-muted" style="font-size: 0.85rem;">Mengekstrak informasi keahlian...</span>
+                                                        @endif
+                                                    </div>
+
+                                                    <a href="{{ route('user.cv.show', $cv->id) }}" class="premium-btn-outline text-decoration-none d-inline-block" style="padding: 6px 16px; font-size: 0.85rem;">
+                                                        Lihat Rekomendasi
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                @else
+                    <div class="text-center py-5">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="var(--text-muted)" class="bi bi-inbox mb-3 opacity-50" viewBox="0 0 16 16">
+                          <path d="M4.98 4a.5.5 0 0 0-.39.188L1.54 8H6a.5.5 0 0 1 .5.5 1.5 1.5 0 1 0 3 0A.5.5 0 0 1 10 8h4.46l-3.05-3.812A.5.5 0 0 0 11.02 4H4.98zm-1.17-.437A1.5 1.5 0 0 1 4.98 3h6.04a1.5 1.5 0 0 1 1.17.563l3.7 4.625a.5.5 0 0 1 .106.311l-.04.422-.05.105c-.14.283-.43.5-.83.5H10.5a.5.5 0 0 0-.5.5.5.5 0 0 1-1 0 .5.5 0 0 0-.5-.5H1.67c-.4 0-.69-.217-.83-.5l-.05-.105-.04-.422a.5.5 0 0 1 .105-.311l3.7-4.625z"/>
+                        </svg>
+                        <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 0;">Belum ada riwayat dokumen.<br>Unggah CV-mu sekarang!</p>
+                    </div>
+                @endif
+            </div>
         </div>
     </div>
 </div>

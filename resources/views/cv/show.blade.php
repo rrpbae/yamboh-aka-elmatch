@@ -85,6 +85,22 @@
                         di bidang yang relevan.
                     </p>
                 </div>
+
+                @if(isset($hasilAi['suggestions']) && is_array($hasilAi['suggestions']) && count($hasilAi['suggestions']) > 0)
+                <div class="mt-4 pt-3" style="border-top: 1px solid var(--card-border);">
+                    <h6 style="font-weight: 700; color: var(--text-main); font-size: 0.95rem; margin-bottom: 12px; display: flex; align-items: center;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="var(--warning-color)" class="bi bi-lightbulb me-2" viewBox="0 0 16 16">
+                          <path d="M2 6a6 6 0 1 1 10.174 4.31c-.203.196-.359.4-.453.619l-.762 1.769A.5.5 0 0 1 10.5 13a.5.5 0 0 1 0 1 .5.5 0 0 1 0 1l-.224.447a1 1 0 0 1-.894.553H6.618a1 1 0 0 1-.894-.553L5.5 15a.5.5 0 0 1 0-1 .5.5 0 0 1 0-1 .5.5 0 0 1-.459-.287l-.761-1.768c-.094-.219-.25-.423-.453-.619A6 6 0 0 1 2 6zm6-5a5 5 0 0 0-3.479 8.592c.263.254.514.564.676.941L5.83 12h4.342l.632-1.467c.162-.377.413-.687.676-.941A5 5 0 0 0 8 1z"/>
+                        </svg>
+                        Saran Perbaikan CV (AI)
+                    </h6>
+                    <ul style="color: var(--text-muted); font-size: 0.85rem; padding-left: 1rem;">
+                        @foreach($hasilAi['suggestions'] as $saran)
+                            <li class="mb-2">{{ $saran }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+                @endif
             </div>
         </div>
 

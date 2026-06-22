@@ -12,6 +12,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [App\Http\Controllers\AdminController::class, 'dashboard'])->name('dashboard');
+    Route::get('/users', [App\Http\Controllers\AdminController::class, 'users'])->name('users');
+    Route::delete('/users/{user}', [App\Http\Controllers\AdminController::class, 'destroyUser'])->name('users.destroy');
 });
 
 Route::middleware(['auth', 'role:company'])->prefix('company')->name('company.')->group(function () {

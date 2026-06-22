@@ -1,5 +1,4 @@
 <div align="center">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Laravel.svg/1200px-Laravel.svg.png" alt="Laravel Logo" width="80"/>
   <h1>ElMatch</h1>
   <p><b>Platform Review CV Cerdas Berbasis AI (AI-Powered ATS)</b></p>
   <p>Sistem ini dirancang untuk menyederhanakan proses rekrutmen. Pelamar cukup mengunggah CV (PDF), dan AI akan otomatis mengekstrak data keahlian (skills) lalu mencocokkannya dengan lowongan kerja yang tersedia.</p>

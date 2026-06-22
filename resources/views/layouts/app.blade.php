@@ -13,22 +13,23 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* Clean Light Mode Palette */
-            --primary-bg: #f1f5f9; /* Slate 100 */
-            --card-bg: #f8fafc; /* Slate 50 */
-            --card-border: #cbd5e1; /* Slate 300 */
+            /* Cyan Modern SaaS Palette */
+            --primary-bg: #f8fafc; /* Slate 50 - matches landing page body */
+            --card-bg: #ffffff; /* White */
+            --card-border: #e2e8f0; /* Slate 200 */
             --text-main: #0f172a; /* Slate 900 */
             --text-muted: #475569; /* Slate 600 */
-            --accent-color: #2563eb; /* Blue 600 */
-            --accent-hover: #1d4ed8; /* Blue 700 */
-            --accent-light: #eff6ff; /* Blue 50 */
-            --success-color: #059669; /* Emerald 600 */
+            --accent-color: #06b6d4; /* Cyan 500 */
+            --accent-hover: #0891b2; /* Cyan 600 */
+            --accent-light: #ecfeff; /* Cyan 50 */
+            --success-color: #10b981; /* Emerald 500 */
             --success-light: #ecfdf5; /* Emerald 50 */
-            --warning-color: #d97706; /* Amber 600 */
+            --warning-color: #f59e0b; /* Amber 500 */
             --warning-light: #fffbeb; /* Amber 50 */
-            --danger-color: #dc2626; /* Red 600 */
+            --danger-color: #ef4444; /* Red 500 */
             --danger-light: #fef2f2; /* Red 50 */
-            --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+            --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px -1px rgba(0, 0, 0, 0.01);
+            --card-shadow-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
         }
 
         body {
@@ -36,30 +37,55 @@
             background-color: var(--primary-bg);
             color: var(--text-main);
             min-height: 100vh;
+            /* Optional: Match landing grid pattern slightly */
+            background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h40v40H0V0zm39 39V1H1v38h38z' fill='%23e2e8f0' fill-opacity='0.4' fill-rule='evenodd'/%3E%3C/svg%3E");
+            background-attachment: fixed;
         }
 
         .navbar {
-            background: rgba(248, 250, 252, 0.9) !important;
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--card-border);
+            background: rgba(255, 255, 255, 0.8) !important;
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(226, 232, 240, 0.8);
             box-shadow: none !important;
             height: 80px;
             display: flex;
             align-items: center;
         }
 
+        .nav-container {
+            width: 100%;
+            max-width: 1280px; /* Equivalent to max-w-7xl */
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 1rem;
+            padding-right: 1rem;
+            display: flex;
+            flex-wrap: inherit;
+            align-items: center;
+            justify-content: space-between;
+        }
+        @media (min-width: 640px) {
+            .nav-container { padding-left: 1.5rem; padding-right: 1.5rem; }
+        }
+        @media (min-width: 1024px) {
+            .nav-container { padding-left: 2rem; padding-right: 2rem; }
+        }
+
         .navbar-brand {
             font-weight: 800;
             color: var(--text-main) !important;
-            letter-spacing: -1px;
+            letter-spacing: -0.05em; /* Matches tracking-tighter */
             display: flex;
             align-items: center;
-            font-size: 1.75rem;
+            font-size: 1.5rem; /* Matches text-2xl */
+            line-height: 2rem;
+            padding: 0;
+            margin: 0;
         }
 
         .nav-link {
             color: var(--text-muted) !important;
-            font-weight: 500;
+            font-weight: 600;
             transition: color 0.2s;
         }
         .nav-link:hover {
@@ -68,74 +94,81 @@
 
         .dropdown-menu {
             border: 1px solid var(--card-border);
-            box-shadow: var(--card-shadow);
-            border-radius: 12px;
+            box-shadow: var(--card-shadow-hover);
+            border-radius: 16px;
             padding: 8px 0;
+            border-color: #cbd5e1;
         }
         .dropdown-item {
             color: var(--text-main);
-            font-weight: 500;
-            padding: 8px 20px;
+            font-weight: 600;
+            padding: 10px 20px;
         }
         .dropdown-item:hover {
-            background-color: var(--primary-bg);
+            background-color: var(--accent-light);
             color: var(--accent-color);
         }
 
         .premium-card {
             background: var(--card-bg);
             border: 1px solid var(--card-border);
-            border-radius: 16px;
+            border-radius: 24px; /* Matched bento box */
             box-shadow: var(--card-shadow);
             padding: 32px;
-            transition: box-shadow 0.2s ease-in-out;
+            transition: all 0.3s ease;
         }
 
         .premium-card:hover {
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
+            transform: translateY(-4px);
+            box-shadow: var(--card-shadow-hover);
+            border-color: #cbd5e1;
         }
 
         .premium-btn {
             background: var(--accent-color);
             color: #ffffff;
-            border-radius: 8px;
+            border-radius: 9999px; /* Rounded full like landing page */
             padding: 10px 24px;
-            font-weight: 600;
+            font-weight: 700;
             border: none;
             transition: all 0.2s ease-in-out;
             display: inline-flex;
             align-items: center;
             justify-content: center;
+            box-shadow: 0 4px 14px 0 rgba(6, 182, 212, 0.39);
         }
 
         .premium-btn:hover {
             background: var(--accent-hover);
             color: #ffffff;
-            transform: translateY(-1px);
+            transform: scale(1.02);
+            box-shadow: 0 6px 20px rgba(6, 182, 212, 0.23);
         }
 
         .premium-btn-outline {
             background: transparent;
-            color: var(--accent-color);
-            border: 1px solid var(--accent-color);
-            border-radius: 8px;
-            padding: 8px 20px;
-            font-weight: 600;
+            color: var(--text-main);
+            border: 1px solid var(--card-border);
+            border-radius: 9999px;
+            padding: 10px 24px;
+            font-weight: 700;
             transition: all 0.2s ease-in-out;
         }
 
         .premium-btn-outline:hover {
-            background: var(--accent-light);
-            color: var(--accent-hover);
+            background: #f8fafc;
+            color: var(--text-main);
+            border-color: #cbd5e1;
         }
 
         .glass-badge {
             background: var(--accent-light);
             color: var(--accent-color);
-            padding: 6px 12px;
-            border-radius: 6px;
+            padding: 6px 16px;
+            border-radius: 9999px;
             font-size: 0.85rem;
-            font-weight: 600;
+            font-weight: 700;
+            border: 1px solid rgba(6, 182, 212, 0.2);
         }
 
         .file-upload-wrapper {
@@ -162,10 +195,10 @@
             font-size: 0.95rem;
             transition: all 0.2s;
         }
-        .form-control-premium:focus {
-            box-shadow: 0 0 0 3px var(--accent-light);
-            border-color: var(--accent-color);
-            outline: none;
+        .form-control-premium:focus, .form-select.form-control-premium:focus {
+            box-shadow: 0 0 0 3px var(--accent-light) !important;
+            border-color: var(--accent-color) !important;
+            outline: none !important;
         }
         .form-control-premium::placeholder {
             color: #94a3b8;
@@ -208,7 +241,7 @@
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md fixed-top">
-            <div class="container">
+            <div class="nav-container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     ElMatch
                 </a>

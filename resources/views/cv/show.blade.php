@@ -97,17 +97,37 @@
                     <div class="premium-card mb-4" style="padding: 24px;">
                         <div class="d-flex justify-content-between align-items-start">
                             <div class="d-flex w-100">
-                                <!-- Score Circle -->
+                                <!-- Modern SVG Score Circle -->
                                 @php
-                                    $scoreClass = 'score-low';
-                                    if($rec->match_score >= 80) {
-                                        $scoreClass = 'score-high';
-                                    } elseif($rec->match_score >= 50) {
-                                        $scoreClass = 'score-med';
+                                    $score = round($rec->score);
+                                    
+                                    $colorClass = 'text-danger';
+                                    $strokeColor = '#ef4444'; // Red 500
+                                    $statusText = 'Kurang Cocok';
+                                    
+                                    if($score >= 80) {
+                                        $colorClass = 'text-success';
+                                        $strokeColor = '#10b981'; // Emerald 500
+                                        $statusText = 'Sangat Cocok';
+                                    } elseif($score >= 50) {
+                                        $colorClass = 'text-warning';
+                                        $strokeColor = '#f59e0b'; // Amber 500
+                                        $statusText = 'Cocok';
                                     }
                                 @endphp
-                                <div class="score-circle {{ $scoreClass }} me-4 flex-shrink-0 shadow-sm">
-                                    {{ $rec->match_score }}%
+                                <div class="d-flex flex-column align-items-center me-4 flex-shrink-0">
+                                    <div class="position-relative d-flex align-items-center justify-content-center" style="width: 80px; height: 80px;">
+                                        <!-- Track Circle -->
+                                        <svg class="position-absolute" width="80" height="80" viewBox="0 0 100 100">
+                                            <circle cx="50" cy="50" r="40" fill="none" stroke="#f1f5f9" stroke-width="8"></circle>
+                                            <!-- Progress Circle -->
+                                            <circle cx="50" cy="50" r="40" fill="none" stroke="{{ $strokeColor }}" stroke-width="8" 
+                                                    stroke-dasharray="251.2" stroke-dashoffset="{{ 251.2 - (251.2 * $score / 100) }}" 
+                                                    stroke-linecap="round" transform="rotate(-90 50 50)" style="transition: stroke-dashoffset 1s ease-in-out;"></circle>
+                                        </svg>
+                                        <span style="font-weight: 800; font-size: 1.4rem; color: var(--text-main); z-index: 1;">{{ $score }}<span style="font-size: 0.8rem;">%</span></span>
+                                    </div>
+                                    <span class="mt-2 {{ $colorClass }}" style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">{{ $statusText }}</span>
                                 </div>
                                 
                                 <div class="w-100">

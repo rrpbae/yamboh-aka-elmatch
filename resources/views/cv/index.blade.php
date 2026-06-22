@@ -6,7 +6,14 @@
         <!-- Form Upload Column -->
         <div class="col-md-5 mb-4">
             <div class="premium-card">
-                <h4 style="font-weight: 700; color: var(--text-main); margin-bottom: 24px; font-size: 1.25rem;">Unggah Dokumen CV</h4>
+                <div class="d-flex align-items-center mb-4 pb-3" style="border-bottom: 1px solid var(--card-border);">
+                    <a href="{{ route('user.dashboard') }}" class="btn btn-light" style="border: 1px solid var(--card-border); background: white; border-radius: 8px; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; margin-right: 16px;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                          <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+                        </svg>
+                    </a>
+                    <h4 style="font-weight: 700; color: var(--text-main); margin:0; font-size: 1.25rem;">Unggah Dokumen CV</h4>
+                </div>
                 
                 @if(session('success'))
                     <div class="alert alert-success mb-4 border-0" style="background-color: var(--success-light); color: var(--success-color); border-radius: 12px;">
@@ -27,7 +34,7 @@
                         </svg>
                         <div style="line-height: 1.5;">
                             <strong style="display: block; margin-bottom: 4px;">Penting: Syarat Format CV</strong>
-                            Agar AI dapat bekerja maksimal, unggah <b>PDF berformat teks</b> (hasil export dari Word/Canva). <br><u>Jangan</u> unggah foto, gambar jpeg, atau hasil scan yang dijadikan PDF (PDF Bergambar) karena AI tidak dapat membaca teks di dalamnya.
+                            Diwajibkan untuk mengunggah CV yang berformat <b>CV ATS Friendly</b> (PDF berformat teks) agar dapat terbaca secara maksimal oleh sistem AI kami. <br><u>Jangan</u> unggah foto, gambar jpeg, atau hasil scan karena sistem tidak dapat mengekstrak teks di dalamnya.
                         </div>
                     </div>
                 </div>

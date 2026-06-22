@@ -12,6 +12,18 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [App\Http\Controllers\AdminController::class, 'dashboard'])->name('dashboard');
+    
+    // CRUD Users
+    Route::get('/users', [App\Http\Controllers\AdminController::class, 'usersIndex'])->name('users.index');
+    Route::get('/users/create', [App\Http\Controllers\AdminController::class, 'usersCreate'])->name('users.create');
+    Route::post('/users', [App\Http\Controllers\AdminController::class, 'usersStore'])->name('users.store');
+    Route::get('/users/{user}/edit', [App\Http\Controllers\AdminController::class, 'usersEdit'])->name('users.edit');
+    Route::put('/users/{user}', [App\Http\Controllers\AdminController::class, 'usersUpdate'])->name('users.update');
+    Route::delete('/users/{user}', [App\Http\Controllers\AdminController::class, 'usersDestroy'])->name('users.destroy');
+
+    // Manajemen Lowongan (Read & Delete)
+    Route::get('/jobs', [App\Http\Controllers\AdminController::class, 'jobsIndex'])->name('jobs.index');
+    Route::delete('/jobs/{job}', [App\Http\Controllers\AdminController::class, 'jobsDestroy'])->name('jobs.destroy');
 });
 
 Route::middleware(['auth', 'role:company'])->prefix('company')->name('company.')->group(function () {
@@ -36,4 +48,5 @@ Route::middleware(['auth', 'role:user'])->prefix('user')->name('user.')->group(f
     Route::get('/cv', [App\Http\Controllers\CvController::class, 'index'])->name('cv.index');
     Route::post('/cv', [App\Http\Controllers\CvController::class, 'store'])->name('cv.store');
     Route::get('/cv/{cv}', [App\Http\Controllers\CvController::class, 'show'])->name('cv.show');
+    Route::get('/jobs/{job}', [App\Http\Controllers\JobVacancyController::class, 'show'])->name('jobs.show');
 });

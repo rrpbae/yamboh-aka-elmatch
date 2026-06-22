@@ -42,6 +42,29 @@
                         @enderror
                     </div>
 
+                    <div class="mb-4">
+                        <label style="font-weight: 700; color: var(--text-main); font-size: 1rem; margin-bottom: 4px; display: block;">Informasi Kontak <span class="text-danger">*</span></label>
+                        <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 12px;">Wajib mengisi setidaknya salah satu kontak agar pelamar dapat menghubungi Anda.</p>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3 mb-md-0">
+                                <label for="kontak_email" style="font-weight: 600; color: var(--text-main); font-size: 0.9rem; margin-bottom: 8px; display: block;">Email Kontak</label>
+                                <input type="email" class="form-control form-control-premium @error('kontak_email') is-invalid @enderror" id="kontak_email" name="kontak_email" value="{{ old('kontak_email', $job->kontak_email) }}" placeholder="Contoh: hrd@perusahaan.com">
+                                @error('kontak_email')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="kontak_telepon" style="font-weight: 600; color: var(--text-main); font-size: 0.9rem; margin-bottom: 8px; display: block;">No. Telepon/WhatsApp</label>
+                                <input type="text" class="form-control form-control-premium @error('kontak_telepon') is-invalid @enderror" id="kontak_telepon" name="kontak_telepon" value="{{ old('kontak_telepon', $job->kontak_telepon) }}" placeholder="Contoh: 08123456789">
+                                @error('kontak_telepon')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="mb-5 premium-card p-4" style="background: #f8fafc; border: 1px solid #e2e8f0;">
                         <div class="form-check form-switch" style="font-size: 1.1rem; display: flex; align-items: center;">
                             <input class="form-check-input mt-0" type="checkbox" role="switch" id="status_open" name="status_open" value="1" {{ old('status_open', $job->status_open) ? 'checked' : '' }} style="cursor:pointer; width: 2.5em; height: 1.25em;">

@@ -3,19 +3,29 @@
 @section('content')
 <div class="container mt-4 mb-5">
     <div class="row mb-4 align-items-center">
-        <div class="col-md-8">
+        <div class="col-md-6">
             <h2 style="font-weight: 700; color: var(--text-main); margin-bottom: 5px;">Dashboard Administrator</h2>
             <p style="color: var(--text-muted); font-size: 1.05rem;">Ringkasan aktivitas platform ElMatch.</p>
         </div>
-        <div class="col-md-4 text-md-end text-start mt-3 mt-md-0">
-            <span class="glass-badge px-4 py-2" style="font-size: 0.9rem; display: inline-flex; align-items: center;">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clock-history me-2" viewBox="0 0 16 16">
-                  <path d="M8.515 1.019A7 7 0 0 0 8 1V0a8 8 0 0 1 .589.022zm2.004.45a7 7 0 0 0-.985-.299l.219-.976q.576.129 1.126.342zm1.37.71a7 7 0 0 0-.439-.27l.493-.87a8 8 0 0 1 .979.654l-.615.789a7 7 0 0 0-.418-.302zm1.834 1.79a7 7 0 0 0-.653-.796l.724-.69q.406.429.747.91zm.744 1.352a7 7 0 0 0-.214-.468l.893-.45a8 8 0 0 1 .45 1.088l-.95.313a7 7 0 0 0-.179-.483m.53 2.507a7 7 0 0 0-.1-1.025l.985-.17q.1.58.116 1.17zm-.131 1.538q.05-.254.081-.51l.993.123a8 8 0 0 1-.23 1.155l-.964-.267q.069-.247.12-.501m-.952 2.379q.276-.436.486-.908l.914.405q-.24.54-.555 1.038zm-.964 1.205q.183-.183.35-.378l.758.653a8 8 0 0 1-.401.432z"/>
-                  <path d="M8 1a7 7 0 1 0 4.95 11.95l.707.707A8.001 8.001 0 1 1 8 0z"/>
-                  <path d="M7.5 3a.5.5 0 0 1 .5.5v5.21l3.248 1.856a.5.5 0 0 1-.496.868l-3.5-2A.5.5 0 0 1 7 9V3.5a.5.5 0 0 1 .5-.5"/>
-                </svg>
-                Data Real-time
-            </span>
+        <div class="col-md-6 text-md-end text-start mt-3 mt-md-0">
+            <div class="mb-3">
+                <span class="glass-badge px-4 py-2" style="font-size: 0.9rem; display: inline-flex; align-items: center;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clock-history me-2" viewBox="0 0 16 16">
+                      <path d="M8.515 1.019A7 7 0 0 0 8 1V0a8 8 0 0 1 .589.022zm2.004.45a7 7 0 0 0-.985-.299l.219-.976q.576.129 1.126.342zm1.37.71a7 7 0 0 0-.439-.27l.493-.87a8 8 0 0 1 .979.654l-.615.789a7 7 0 0 0-.418-.302zm1.834 1.79a7 7 0 0 0-.653-.796l.724-.69q.406.429.747.91zm.744 1.352a7 7 0 0 0-.214-.468l.893-.45a8 8 0 0 1 .45 1.088l-.95.313a7 7 0 0 0-.179-.483m.53 2.507a7 7 0 0 0-.1-1.025l.985-.17q.1.58.116 1.17zm-.131 1.538q.05-.254.081-.51l.993.123a8 8 0 0 1-.23 1.155l-.964-.267q.069-.247.12-.501m-.952 2.379q.276-.436.486-.908l.914.405q-.24.54-.555 1.038zm-.964 1.205q.183-.183.35-.378l.758.653a8 8 0 0 1-.401.432z"/>
+                      <path d="M8 1a7 7 0 1 0 4.95 11.95l.707.707A8.001 8.001 0 1 1 8 0z"/>
+                      <path d="M7.5 3a.5.5 0 0 1 .5.5v5.21l3.248 1.856a.5.5 0 0 1-.496.868l-3.5-2A.5.5 0 0 1 7 9V3.5a.5.5 0 0 1 .5-.5"/>
+                    </svg>
+                    Data Real-time
+                </span>
+            </div>
+            <div class="d-flex justify-content-md-end justify-content-start align-items-center flex-wrap gap-3">
+                <a href="{{ route('admin.jobs.index') }}" class="premium-btn text-decoration-none" style="font-size: 0.9rem; padding: 8px 16px;">
+                    <i class="bi bi-briefcase-fill me-1"></i> Manajemen Lowongan
+                </a>
+                <a href="{{ route('admin.users.index') }}" class="premium-btn text-decoration-none" style="font-size: 0.9rem; padding: 8px 16px;">
+                    <i class="bi bi-people-fill me-1"></i> Manajemen Pengguna
+                </a>
+            </div>
         </div>
     </div>
 

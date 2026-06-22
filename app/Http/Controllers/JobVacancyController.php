@@ -18,6 +18,11 @@ class JobVacancyController extends Controller
             'posisi' => 'required|string|max:255',
             'deskripsi' => 'required|string',
             'kualifikasi' => 'required|string',
+            'kontak_email' => 'required_without:kontak_telepon|nullable|email|max:255',
+            'kontak_telepon' => 'required_without:kontak_email|nullable|string|max:20',
+        ], [
+            'kontak_email.required_without' => 'Anda harus mengisi setidaknya salah satu kontak (Email atau No. Telepon).',
+            'kontak_telepon.required_without' => 'Anda harus mengisi setidaknya salah satu kontak (Email atau No. Telepon).',
         ]);
 
         $company = auth()->user()->company;
@@ -31,6 +36,8 @@ class JobVacancyController extends Controller
             'posisi' => $request->posisi,
             'deskripsi' => $request->deskripsi,
             'kualifikasi' => $request->kualifikasi,
+            'kontak_email' => $request->kontak_email,
+            'kontak_telepon' => $request->kontak_telepon,
             'status_open' => true,
         ]);
 
@@ -57,13 +64,20 @@ class JobVacancyController extends Controller
             'posisi' => 'required|string|max:255',
             'deskripsi' => 'required|string',
             'kualifikasi' => 'required|string',
+            'kontak_email' => 'required_without:kontak_telepon|nullable|email|max:255',
+            'kontak_telepon' => 'required_without:kontak_email|nullable|string|max:20',
             'status_open' => 'boolean',
+        ], [
+            'kontak_email.required_without' => 'Anda harus mengisi setidaknya salah satu kontak (Email atau No. Telepon).',
+            'kontak_telepon.required_without' => 'Anda harus mengisi setidaknya salah satu kontak (Email atau No. Telepon).',
         ]);
 
         $job->update([
             'posisi' => $request->posisi,
             'deskripsi' => $request->deskripsi,
             'kualifikasi' => $request->kualifikasi,
+            'kontak_email' => $request->kontak_email,
+            'kontak_telepon' => $request->kontak_telepon,
             'status_open' => $request->has('status_open'),
         ]);
 
@@ -79,5 +93,11 @@ class JobVacancyController extends Controller
         $job->delete();
 
         return redirect()->route('company.dashboard')->with('success', 'Lowongan kerja berhasil dihapus.');
+    }
+
+    public function show(JobVacancy $job)
+    {
+        // Only allow viewing open jobs or if the user is the company that owns it
+        return view('user.job_show', compact('job'));
     }
 }

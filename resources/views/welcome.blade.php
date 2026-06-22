@@ -94,15 +94,62 @@
             background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-image: linear-gradient(90deg, #0891b2, #22d3ee);
+            background-image: linear-gradient(90deg, #0891b2, #22d3ee, #0891b2);
+            background-size: 200% auto;
+            animation: textShine 4s linear infinite;
+        }
+
+        @keyframes textShine {
+            to {
+                background-position: 200% center;
+            }
+        }
+
+        @keyframes pulse-glow {
+            0% { filter: blur(40px) brightness(1); transform: scale(1); }
+            50% { filter: blur(60px) brightness(1.2); transform: scale(1.05); }
+            100% { filter: blur(40px) brightness(1); transform: scale(1); }
+        }
+
+        @keyframes blob {
+            0% { transform: translate(0px, 0px) scale(1); }
+            33% { transform: translate(30px, -50px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+            100% { transform: translate(0px, 0px) scale(1); }
+        }
+
+        .animate-blob {
+            animation: blob 7s infinite;
+        }
+        .animation-delay-2000 {
+            animation-delay: 2s;
+        }
+        .animation-delay-4000 {
+            animation-delay: 4s;
+        }
+
+        /* Float for icons */
+        .icon-float {
+            animation: float 3s ease-in-out infinite;
+        }
+        .icon-float-delayed {
+            animation: float 3s ease-in-out infinite;
+            animation-delay: 1.5s;
         }
     </style>
 </head>
 <body class="antialiased text-textMain selection:bg-primary selection:text-white relative">
 
     <!-- Background Pattern -->
-    <div class="fixed inset-0 z-[-2] bg-grid-pattern"></div>
-    <div class="fixed inset-0 z-[-1] bg-gradient-to-b from-white/50 to-white/95"></div>
+    <div class="fixed inset-0 z-[-3] bg-grid-pattern opacity-60"></div>
+    <div class="fixed inset-0 z-[-2] bg-gradient-to-b from-slate-50 to-white/95"></div>
+
+    <!-- Animated Blobs Background -->
+    <div class="fixed top-0 left-0 w-full h-full overflow-hidden z-[-1] pointer-events-none">
+        <div class="absolute top-[-10%] left-[-10%] w-96 h-96 bg-cyan-300 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob"></div>
+        <div class="absolute top-[-10%] right-[-10%] w-96 h-96 bg-blue-300 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-2000"></div>
+        <div class="absolute bottom-[-20%] left-[20%] w-96 h-96 bg-teal-300 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-4000"></div>
+    </div>
 
     <!-- Navigation -->
     <nav class="fixed top-0 left-0 w-full z-50 glass-nav transition-all duration-300">
@@ -137,7 +184,7 @@
 
     <!-- Hero Section -->
     <header class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
-        <div class="hero-gradient"></div>
+        <div class="hero-gradient" style="animation: pulse-glow 8s ease-in-out infinite;"></div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
                 <!-- Hero Text -->
@@ -233,8 +280,8 @@
                 <div class="hidden md:block absolute top-12 left-[16%] right-[16%] h-0.5 bg-gradient-to-r from-cyan-100 via-cyan-300 to-cyan-100 z-0"></div>
 
                 <!-- Step 1 -->
-                <div class="relative z-10 flex flex-col items-center text-center">
-                    <div class="w-24 h-24 rounded-3xl bg-white border border-slate-200 shadow-xl shadow-slate-200/50 flex items-center justify-center text-primary mb-6 rotate-3 hover:rotate-0 transition-transform">
+                <div class="relative z-10 flex flex-col items-center text-center group">
+                    <div class="w-24 h-24 rounded-3xl bg-white border border-slate-200 shadow-xl shadow-slate-200/50 flex items-center justify-center text-primary mb-6 rotate-3 group-hover:rotate-0 group-hover:scale-110 transition-all duration-300 ease-out icon-float">
                         <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" viewBox="0 0 16 16"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z"/></svg>
                     </div>
                     <div class="w-8 h-8 rounded-full bg-cyan-100 text-cyan-600 font-bold flex items-center justify-center text-sm mb-4">1</div>
@@ -243,8 +290,8 @@
                 </div>
 
                 <!-- Step 2 -->
-                <div class="relative z-10 flex flex-col items-center text-center">
-                    <div class="w-24 h-24 rounded-3xl bg-white border border-slate-200 shadow-xl shadow-slate-200/50 flex items-center justify-center text-emerald-500 mb-6 -rotate-3 hover:rotate-0 transition-transform">
+                <div class="relative z-10 flex flex-col items-center text-center group">
+                    <div class="w-24 h-24 rounded-3xl bg-white border border-slate-200 shadow-xl shadow-slate-200/50 flex items-center justify-center text-emerald-500 mb-6 -rotate-3 group-hover:rotate-0 group-hover:scale-110 transition-all duration-300 ease-out icon-float-delayed">
                         <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" viewBox="0 0 16 16"><path d="M5 0h6v1H5V0zm7 1h1v1h-1V1zm1 2h1v6h-1V3zm0 7h1v1h-1v-1zm-1 2h1v1h-1v-1zm-7 1h6v1H5v-1zm-1-1H3v1h1v-1zm-1-2H2V3h1v7zm0-8H2V1h1v1z"/><path d="M4 2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H4zm0 1h8a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/></svg>
                     </div>
                     <div class="w-8 h-8 rounded-full bg-emerald-100 text-emerald-600 font-bold flex items-center justify-center text-sm mb-4">2</div>
@@ -253,8 +300,8 @@
                 </div>
 
                 <!-- Step 3 -->
-                <div class="relative z-10 flex flex-col items-center text-center">
-                    <div class="w-24 h-24 rounded-3xl bg-white border border-slate-200 shadow-xl shadow-slate-200/50 flex items-center justify-center text-purple-500 mb-6 rotate-3 hover:rotate-0 transition-transform">
+                <div class="relative z-10 flex flex-col items-center text-center group">
+                    <div class="w-24 h-24 rounded-3xl bg-white border border-slate-200 shadow-xl shadow-slate-200/50 flex items-center justify-center text-purple-500 mb-6 rotate-3 group-hover:rotate-0 group-hover:scale-110 transition-all duration-300 ease-out icon-float">
                         <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" viewBox="0 0 16 16"><path d="M13.5 1a1.5 1.5 0 0 1 1.5 1.5v11a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 1 13.5v-11A1.5 1.5 0 0 1 2.5 1h11zm-11 1a.5.5 0 0 0-.5.5v11a.5.5 0 0 0 .5.5h11a.5.5 0 0 0 .5-.5v-11a.5.5 0 0 0-.5-.5h-11z"/><path d="M10.97 4.97a.75.75 0 0 1 1.071 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.235.235 0 0 1 .02-.022z"/></svg>
                     </div>
                     <div class="w-8 h-8 rounded-full bg-purple-100 text-purple-600 font-bold flex items-center justify-center text-sm mb-4">3</div>

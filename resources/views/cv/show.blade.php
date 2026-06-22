@@ -162,9 +162,9 @@
                                     </div>
                                     
                                     <div class="text-end mt-3">
-                                        <button class="premium-btn text-decoration-none" onclick="alert('Fitur pelamaran langsung sedang dalam tahap pengembangan.')" style="font-size: 0.9rem; padding: 8px 24px;">
-                                            Ajukan Lamaran
-                                        </button>
+                                        <a href="{{ route('user.jobs.show', $rec->jobVacancy->id) }}" class="premium-btn text-decoration-none" style="font-size: 0.9rem; padding: 8px 24px;">
+                                            Lihat Detail Lowongan
+                                        </a>
                                     </div>
                                 </div>
                             </div>

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class JobVacancy extends Model
 {
-    protected $fillable = ['company_id', 'posisi', 'deskripsi', 'kualifikasi', 'status_open'];
+    protected $fillable = ['company_id', 'posisi', 'deskripsi', 'kualifikasi', 'kontak_email', 'kontak_telepon', 'status_open'];
     public function company()
     {
         return $this->belongsTo(Company::class);

@@ -158,12 +158,25 @@
                                             <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 4px; margin-bottom: 0;">{{ $job->company->nama_perusahaan ?? 'Perusahaan Rahasia' }}</p>
                                         </div>
                                     </div>
-                                    <div style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.5; margin-bottom: 16px; height: 40px; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">
+                                    <div style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.5; margin-bottom: 12px; height: 40px; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">
                                         {{ Str::limit(strip_tags($job->deskripsi), 80) }}
                                     </div>
+                                    
+                                    @if($job->kontak_email || $job->kontak_telepon)
+                                    <div style="margin-bottom: 16px; font-size: 0.85rem; color: var(--text-main); background: #f8fafc; padding: 10px; border-radius: 8px; border: 1px solid #e2e8f0;">
+                                        <div style="font-weight: 700; margin-bottom: 6px; color: var(--text-muted); font-size: 0.75rem; text-transform: uppercase;">Hubungi Rekruter:</div>
+                                        @if($job->kontak_email)
+                                            <div class="mb-1"><i class="bi bi-envelope-fill me-2" style="color: var(--accent-color);"></i> <a href="mailto:{{ $job->kontak_email }}" style="color: var(--text-main); text-decoration: none;">{{ $job->kontak_email }}</a></div>
+                                        @endif
+                                        @if($job->kontak_telepon)
+                                            <div><i class="bi bi-whatsapp me-2" style="color: var(--success-color);"></i> <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $job->kontak_telepon) }}" target="_blank" style="color: var(--text-main); text-decoration: none;">{{ $job->kontak_telepon }}</a></div>
+                                        @endif
+                                    </div>
+                                    @endif
+
                                     <div class="d-flex justify-content-between align-items-center pt-3" style="border-top: 1px solid var(--primary-bg);">
                                         <span class="badge" style="background: var(--primary-bg); color: var(--text-muted); border: 1px solid var(--card-border); font-weight: 500;">Baru Ditambahkan</span>
-                                        <button class="premium-btn" style="padding: 6px 16px; font-size: 0.85rem;">Lihat</button>
+                                        <a href="{{ route('user.jobs.show', $job->id) }}" class="premium-btn text-decoration-none" style="padding: 6px 16px; font-size: 0.85rem;">Lihat</a>
                                     </div>
                                 </div>
                             </div>

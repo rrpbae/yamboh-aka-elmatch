@@ -33,13 +33,38 @@
                         @enderror
                     </div>
 
-                    <div class="mb-5">
+                    <div class="mb-4">
                         <label for="kualifikasi" style="font-weight: 600; color: var(--text-main); font-size: 0.9rem; margin-bottom: 8px; display: block;">Kualifikasi & Persyaratan (Keahlian)</label>
                         <textarea class="form-control form-control-premium @error('kualifikasi') is-invalid @enderror" id="kualifikasi" name="kualifikasi" rows="5" placeholder="Contoh: Menguasai PHP, Laravel, MySQL. Berpengalaman 2 tahun..." required>{{ old('kualifikasi') }}</textarea>
                         <small style="color: var(--text-muted); margin-top: 8px; display: block; font-size: 0.85rem;">* Pastikan menuliskan kata kunci (keyword) keahlian spesifik agar sistem AI kami dapat mencocokkannya dengan CV pelamar.</small>
                         @error('kualifikasi')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
+                    </div>
+
+                    <div class="mb-4">
+                        <label style="font-weight: 700; color: var(--text-main); font-size: 1rem; margin-bottom: 4px; display: block;">Informasi Kontak <span class="text-danger">*</span></label>
+                        <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 12px;">Wajib mengisi setidaknya salah satu kontak agar pelamar dapat menghubungi Anda.</p>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3 mb-md-0">
+                                <label for="kontak_email" style="font-weight: 600; color: var(--text-main); font-size: 0.9rem; margin-bottom: 8px; display: block;">Email Kontak</label>
+                                <input type="email" class="form-control form-control-premium @error('kontak_email') is-invalid @enderror" id="kontak_email" name="kontak_email" value="{{ old('kontak_email') }}" placeholder="Contoh: hrd@perusahaan.com">
+                                <small style="color: var(--text-muted); margin-top: 8px; display: block; font-size: 0.85rem;">Email agar pelamar bisa langsung menghubungi Anda.</small>
+                                @error('kontak_email')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="kontak_telepon" style="font-weight: 600; color: var(--text-main); font-size: 0.9rem; margin-bottom: 8px; display: block;">No. Telepon/WhatsApp</label>
+                                <input type="text" class="form-control form-control-premium @error('kontak_telepon') is-invalid @enderror" id="kontak_telepon" name="kontak_telepon" value="{{ old('kontak_telepon') }}" placeholder="Contoh: 08123456789">
+                                <small style="color: var(--text-muted); margin-top: 8px; display: block; font-size: 0.85rem;">Nomor HP/WA rekruter yang dapat dihubungi.</small>
+                                @error('kontak_telepon')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
                     </div>
 
                     <div class="d-flex justify-content-end mt-4">

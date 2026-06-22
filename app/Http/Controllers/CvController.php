@@ -49,7 +49,7 @@ class CvController extends Controller
         // 4. Kalkulasi Pencocokan (Scoring) dengan Lowongan Kerja (Job Vacancies)
         $this->calculateRecommendations($cv, $aiResult['skills']);
 
-        return redirect()->route('user.cv.index')->with('success', 'CV berhasil dianalisis! Lihat rekomendasi loker di bawah.');
+        return redirect()->route('user.cv.index')->with('success', 'CV berhasil dianalisis! Ayo segera cek rekomendasi perusahaan yang cocok untuk kamu');
     }
 
     private function calculateRecommendations(Cv $cv, array $userSkills)

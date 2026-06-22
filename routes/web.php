@@ -28,7 +28,11 @@ Route::middleware(['auth', 'role:company'])->prefix('company')->name('company.')
 });
 
 Route::middleware(['auth', 'role:user'])->prefix('user')->name('user.')->group(function () {
-    Route::get('/dashboard', function () { return view('user.dashboard'); })->name('dashboard');
+    Route::get('/dashboard', function () { 
+        $cvs = Auth::user()->cvs()->latest()->get();
+        $jobs = \App\Models\JobVacancy::where('status_open', true)->latest()->take(4)->get();
+        return view('user.dashboard', compact('cvs', 'jobs')); 
+    })->name('dashboard');
     Route::get('/cv', [App\Http\Controllers\CvController::class, 'index'])->name('cv.index');
     Route::post('/cv', [App\Http\Controllers\CvController::class, 'store'])->name('cv.store');
     Route::get('/cv/{cv}', [App\Http\Controllers\CvController::class, 'show'])->name('cv.show');

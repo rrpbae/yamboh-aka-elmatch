@@ -14,6 +14,13 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::get('/dashboard', [App\Http\Controllers\AdminController::class, 'dashboard'])->name('dashboard');
     Route::get('/users', [App\Http\Controllers\AdminController::class, 'users'])->name('users');
     Route::delete('/users/{user}', [App\Http\Controllers\AdminController::class, 'destroyUser'])->name('users.destroy');
+    Route::get('/companies', [App\Http\Controllers\AdminController::class, 'companies'])->name('companies');
+    Route::delete('/companies/{company}', [App\Http\Controllers\AdminController::class, 'destroyCompany'])->name('companies.destroy');
+    Route::get('/jobs', [App\Http\Controllers\AdminController::class, 'jobs'])->name('jobs');
+    Route::delete('/jobs/{job}', [App\Http\Controllers\AdminController::class, 'destroyJob'])->name('jobs.destroy');
+    Route::get('/cvs', [App\Http\Controllers\AdminController::class, 'cvs'])->name('cvs');
+    Route::delete('/cvs/{cv}', [App\Http\Controllers\AdminController::class, 'destroyCv'])->name('cvs.destroy');
+    Route::get('/report/download', [App\Http\Controllers\AdminController::class, 'downloadReport'])->name('report.download');
 });
 
 Route::middleware(['auth', 'role:company'])->prefix('company')->name('company.')->group(function () {

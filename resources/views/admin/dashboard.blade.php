@@ -106,10 +106,10 @@
             <p style="color: var(--text-muted); font-size: 1.05rem; margin:0;">Ringkasan dan kendali utama platform ElMatch.</p>
         </div>
         <div class="col-md-5 text-md-end text-start mt-3 mt-md-0 d-flex justify-content-md-end align-items-center">
-            <button class="btn btn-sm btn-outline-dark me-3 rounded-pill px-3 py-2" onclick="alert('Memproses file PDF Laporan... Tunggu sebentar.')">
+            <a href="{{ route('admin.report.download') }}" class="btn btn-sm btn-outline-dark me-3 rounded-pill px-3 py-2">
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-download me-2" viewBox="0 0 16 16"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
-                Unduh Laporan
-            </button>
+                Unduh Laporan CSV
+            </a>
             <span class="glass-badge px-3 py-2 shadow-sm" style="font-size: 0.85rem; display: inline-flex; align-items: center; border: 1px solid var(--card-border); border-radius: 50px;">
                 <span class="pulse-dot"></span>
                 Sistem Aktif
@@ -131,7 +131,7 @@
                     <h3 style="font-weight: 800; color: var(--text-main); margin-bottom: 5px; font-size: 2.2rem;">{{ $stats['total_users'] }}</h3>
                     <p style="color: var(--text-muted); font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin: 0;">Pencari Kerja</p>
                 </div>
-                <a href="#" class="card-footer-link" onclick="alert('Fitur Manajemen Pengguna akan segera hadir!')">Kelola Pengguna &rarr;</a>
+                <a href="{{ route('admin.users') }}" class="card-footer-link">Kelola Pengguna &rarr;</a>
             </div>
         </div>
         
@@ -147,7 +147,7 @@
                     <h3 style="font-weight: 800; color: var(--text-main); margin-bottom: 5px; font-size: 2.2rem;">{{ $stats['total_companies'] }}</h3>
                     <p style="color: var(--text-muted); font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin: 0;">Perusahaan</p>
                 </div>
-                <a href="#" class="card-footer-link" style="background: var(--success-light); color: var(--success-color); border-top-color: var(--success-light);" onmouseover="this.style.background='var(--success-color)'; this.style.color='#fff';" onmouseout="this.style.background='var(--success-light)'; this.style.color='var(--success-color)';">Verifikasi Mitra &rarr;</a>
+                <a href="{{ route('admin.companies') }}" class="card-footer-link" style="background: var(--success-light); color: var(--success-color); border-top-color: var(--success-light);" onmouseover="this.style.background='var(--success-color)'; this.style.color='#fff';" onmouseout="this.style.background='var(--success-light)'; this.style.color='var(--success-color)';">Verifikasi Mitra &rarr;</a>
             </div>
         </div>
 
@@ -164,7 +164,7 @@
                     <h3 style="font-weight: 800; color: var(--text-main); margin-bottom: 5px; font-size: 2.2rem;">{{ $stats['total_jobs'] }}</h3>
                     <p style="color: var(--text-muted); font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin: 0;">Lowongan Aktif</p>
                 </div>
-                <a href="#" class="card-footer-link" style="background: var(--warning-light); color: #b45309; border-top-color: var(--warning-light);" onmouseover="this.style.background='var(--warning-color)'; this.style.color='#fff';" onmouseout="this.style.background='var(--warning-light)'; this.style.color='#b45309';">Pantau Lowongan &rarr;</a>
+                <a href="{{ route('admin.jobs') }}" class="card-footer-link" style="background: var(--warning-light); color: #b45309; border-top-color: var(--warning-light);" onmouseover="this.style.background='var(--warning-color)'; this.style.color='#fff';" onmouseout="this.style.background='var(--warning-light)'; this.style.color='#b45309';">Pantau Lowongan &rarr;</a>
             </div>
         </div>
 
@@ -181,7 +181,7 @@
                     <h3 style="font-weight: 800; color: var(--text-main); margin-bottom: 5px; font-size: 2.2rem;">{{ $stats['total_cvs'] }}</h3>
                     <p style="color: var(--text-muted); font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin: 0;">CV Dianalisis</p>
                 </div>
-                <a href="#" class="card-footer-link" style="background: var(--danger-light); color: var(--danger-color); border-top-color: var(--danger-light);" onmouseover="this.style.background='var(--danger-color)'; this.style.color='#fff';" onmouseout="this.style.background='var(--danger-light)'; this.style.color='var(--danger-color)';">Laporan Analisis &rarr;</a>
+                <a href="{{ route('admin.cvs') }}" class="card-footer-link" style="background: var(--danger-light); color: var(--danger-color); border-top-color: var(--danger-light);" onmouseover="this.style.background='var(--danger-color)'; this.style.color='#fff';" onmouseout="this.style.background='var(--danger-light)'; this.style.color='var(--danger-color)';">Laporan Analisis &rarr;</a>
             </div>
         </div>
     </div>
@@ -193,7 +193,7 @@
             <div class="premium-card h-100 p-4 d-flex flex-column">
                 <div class="d-flex justify-content-between align-items-center mb-4 pb-2" style="border-bottom: 1px dashed var(--card-border);">
                     <h5 style="font-weight: 800; color: var(--text-main); margin: 0; font-size: 1.15rem;">Pencari Kerja Terbaru</h5>
-                    <button class="btn btn-sm btn-light rounded-pill px-3" style="font-size: 0.8rem; font-weight: 600;" onclick="alert('Membuka daftar lengkap pencari kerja...')">Lihat Semua</button>
+                    <a href="{{ route('admin.users') }}" class="btn btn-sm btn-light rounded-pill px-3" style="font-size: 0.8rem; font-weight: 600;">Lihat Semua</a>
                 </div>
                 
                 @if($recentUsers->count() > 0)
@@ -248,7 +248,7 @@
             <div class="premium-card h-100 p-4 d-flex flex-column">
                 <div class="d-flex justify-content-between align-items-center mb-4 pb-2" style="border-bottom: 1px dashed var(--card-border);">
                     <h5 style="font-weight: 800; color: var(--text-main); margin: 0; font-size: 1.15rem;">Perusahaan Terbaru</h5>
-                    <button class="btn btn-sm btn-light rounded-pill px-3" style="font-size: 0.8rem; font-weight: 600;" onclick="alert('Membuka direktori perusahaan...')">Lihat Semua</button>
+                    <a href="{{ route('admin.companies') }}" class="btn btn-sm btn-light rounded-pill px-3" style="font-size: 0.8rem; font-weight: 600;">Lihat Semua</a>
                 </div>
                 
                 @if($recentCompanies->count() > 0)
